@@ -11,7 +11,6 @@
 //  https://github.com/danielgindi/ios-charts
 //  https://github.com/danielgindi/Charts/blob/1788e53f22eb3de79eb4f08574d8ea4b54b5e417/ChartsDemo/Classes/Components/BalloonMarker.swift
 //  Edit: Added textColor
-
 import Foundation;
 
 import Charts;
@@ -20,7 +19,7 @@ import SwiftyJSON;
 
 open class BalloonMarker: MarkerView {
     open var color: UIColor?
-    open var arrowSize = CGSize(width: 15, height: 11)
+    open var arrowSize = CGSize(width: 0, height: 0)
     open var font: UIFont?
     open var textColor: UIColor?
     open var minimumSize = CGSize()
@@ -94,91 +93,35 @@ open class BalloonMarker: MarkerView {
 
         }
         
+        let bezierPath = UIBezierPath(roundedRect: rect, cornerRadius: 15.0)
+        UIColor.white.setFill()
+        bezierPath.fill()
+        
         return rect
     }
 
     func drawCenterRect(context: CGContext, rect: CGRect) {
-
-        context.setFillColor((color?.cgColor)!)
-        context.beginPath()
-        context.move(to: CGPoint(x: rect.origin.x, y: rect.origin.y))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height - arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + (rect.size.width + arrowSize.width) / 2.0, y: rect.origin.y + rect.size.height - arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width / 2.0, y: rect.origin.y + rect.size.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + (rect.size.width - arrowSize.width) / 2.0, y: rect.origin.y + rect.size.height - arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.size.height - arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y))
-        context.fillPath()
-
+        context.setShadow(offset: CGSize.zero, blur: 8.0, color: (textColor?.cgColor)!)
     }
 
     func drawLeftRect(context: CGContext, rect: CGRect) {
-        context.setFillColor((color?.cgColor)!)
-        context.beginPath()
-        context.move(to: CGPoint(x: rect.origin.x, y: rect.origin.y))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height - arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + arrowSize.width / 2.0, y: rect.origin.y + rect.size.height - arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.size.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y))
-        context.fillPath()
-
+        context.setShadow(offset: CGSize.zero, blur: 8.0, color: (textColor?.cgColor)!)
     }
 
     func drawRightRect(context: CGContext, rect: CGRect) {
-        context.setFillColor((color?.cgColor)!)
-        context.beginPath()
-        context.move(to: CGPoint(x: rect.origin.x, y: rect.origin.y))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height))
-        context.addLine(to: CGPoint(x: rect.origin.x  + rect.size.width - arrowSize.width / 2.0, y: rect.origin.y + rect.size.height - arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.size.height - arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y))
-        context.fillPath()
-
+        context.setShadow(offset: CGSize.zero, blur: 8.0, color: (textColor?.cgColor)!)
     }
     
     func drawTopCenterRect(context: CGContext, rect: CGRect) {
-        
-        context.setFillColor((color?.cgColor)!)
-        context.beginPath()
-        context.move(to: CGPoint(x: rect.origin.x + rect.size.width / 2.0, y: rect.origin.y))
-        context.addLine(to: CGPoint(x: rect.origin.x + (rect.size.width + arrowSize.width) / 2.0, y: rect.origin.y + arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.size.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + (rect.size.width - arrowSize.width) / 2.0, y: rect.origin.y + arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width / 2.0, y: rect.origin.y))
-        context.fillPath()
-        
+        context.setShadow(offset: CGSize.zero, blur: 8.0, color: (textColor?.cgColor)!)
     }
 
     func drawTopLeftRect(context: CGContext, rect: CGRect) {
-        context.setFillColor((color?.cgColor)!)
-        context.beginPath()
-        context.move(to: CGPoint(x: rect.origin.x, y: rect.origin.y))
-        context.addLine(to: CGPoint(x: rect.origin.x + arrowSize.width / 2.0, y: rect.origin.y + arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.size.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y))
-        context.fillPath()
-
+        context.setShadow(offset: CGSize.zero, blur: 8.0, color: (textColor?.cgColor)!)
     }
 
     func drawTopRightRect(context: CGContext, rect: CGRect) {
-        context.setFillColor((color?.cgColor)!)
-        context.beginPath()
-        context.move(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y + rect.size.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.size.height))
-        context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width - arrowSize.height / 2.0, y: rect.origin.y + arrowSize.height))
-        context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y))
-        context.fillPath()
-
+        context.setShadow(offset: CGSize.zero, blur: 8.0, color: (textColor?.cgColor)!)
     }
 
 
@@ -223,18 +166,22 @@ open class BalloonMarker: MarkerView {
         }
 
         labelns = label as NSString
+        
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor.white
 
         _drawAttributes.removeAll()
         _drawAttributes[NSAttributedString.Key.font] = self.font
         _drawAttributes[NSAttributedString.Key.paragraphStyle] = _paragraphStyle
         _drawAttributes[NSAttributedString.Key.foregroundColor] = self.textColor
+        _drawAttributes[NSAttributedString.Key.baselineOffset] = -3.5
+        _drawAttributes[NSAttributedString.Key.shadow] = shadow
 
         _labelSize = labelns?.size(withAttributes: _drawAttributes) ?? CGSize.zero
-        _size.width = _labelSize.width + self.insets.left + self.insets.right
-        _size.height = _labelSize.height + self.insets.top + self.insets.bottom
+        _size.width = _labelSize.width + self.insets.left + self.insets.right + 3
+        _size.height = _labelSize.height + self.insets.top + self.insets.bottom + 5
         _size.width = max(minimumSize.width, _size.width)
         _size.height = max(minimumSize.height, _size.height)
 
     }
 }
-
